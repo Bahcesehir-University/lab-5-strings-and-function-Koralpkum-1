@@ -124,10 +124,10 @@ MyString MyString::substring(int start, int len) const {
     // Throw std::out_of_range if start is invalid (negative or >= length)
     // Hint: Use std::string::substr()
     
-    if(start <0 || start >= static_cast<int>(data.length())){
+    if(start < 0 || start >= static_cast<int>(data.length())){
         throw out_of_range("");
     }
-    return MyString(data.substr(start, data.length()));
+    return MyString(data.substr(start, len));
 }
 
 // ---- String Manipulation ----
@@ -159,10 +159,10 @@ MyString MyString::trim() const {
     // Whitespace includes: space, tab (\t), newline (\n), carriage return (\r)
     // Hint: Use find_first_not_of and find_last_not_of
     
-    size_t start = data.find_first_not_of("\t\n\r");
+    size_t start = data.find_first_not_of(" \t\n\r");
     if(start == string::npos) return MyString("");
-    size_t end = data.find_last_not_of("\t\n\r");
-    return MyString(data.substr(end - start +1));
+    size_t end = data.find_last_not_of(" \t\n\r");
+    return MyString(data.substr(start, (end - start +1)));
 }
 
 MyString MyString::reverse() const {
